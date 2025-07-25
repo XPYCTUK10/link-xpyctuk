@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
   <title>XPYCTUK — RUST Content</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Основной стиль */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -94,50 +94,60 @@
       color: #555;
       font-size: 0.75em;
     }
+
+    .lang-toggle {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: 1px solid #666;
+      padding: 6px 10px;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .lang-toggle:hover {
+      background: #222;
+    }
   </style>
 </head>
 <body class="preload">
-  <!-- Баннер -->
-  <img src="TOP ТОПОВЫЙ 8к (оформ).jpg" alt="Rust Banner" class="banner">
+  <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
 
-  <!-- Логотип -->
+  <img src="TOP ТОПОВЫЙ 8к (оформ).jpg" alt="Rust Banner" class="banner">
   <img src="V-1-2.png" alt="Logo" class="logo">
 
-  <!-- Заголовки -->
-  <h1>XPYCTUK</h1>
-  <h2>Очень известный</h2>
-  <h5>в узких кругах</h5>
+  <h1 id="title">XPYCTUK</h1>
+  <h2 id="subtitle">Очень известный</h2>
+  <h5 id="caption">в узких кругах</h5>
 
-  <!-- Кнопки -->
   <div class="buttons">
-    <a href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playClick()">🎬 YouTube</a>
-    <a href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playClick()">💬 Telegram</a>
-    <a href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playClick()">🧠 Discord</a>
+    <a id="btnYoutube" href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playClick()">🎬 YouTube</a>
+    <a id="btnTelegram" href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playClick()">💬 Telegram</a>
+    <a id="btnDiscord" href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playClick()">🧠 Discord</a>
   </div>
 
-  <!-- Подвал -->
   <div class="footer">
-    © 2025 | Made by XPYCTUK [ x-X-x ] v 0.12
+    © 2025 | Made by XPYCTUK [ x-X-x ] v 0.13
   </div>
 
-  <!-- Звуки -->
   <audio id="click-sound" src="typing.mp3" preload="auto"></audio>
   <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
 
   <script>
-    // Настройка громкости
     const clickSound = document.getElementById('click-sound');
     const hoverSound = document.getElementById('hover-sound');
-    clickSound.volume = 0.5; // громкость щелчка
-    hoverSound.volume = 0.5; // громкость наведения
+    clickSound.volume = 0.5;
+    hoverSound.volume = 0.5;
 
-    // Щелчок
     function playClick() {
       clickSound.currentTime = 0;
       clickSound.play();
     }
 
-    // Наведение
     document.querySelectorAll('.buttons a').forEach(button => {
       button.addEventListener('mouseenter', () => {
         hoverSound.currentTime = 0;
@@ -145,12 +155,50 @@
       });
     });
 
-    // Плавное появление баннера
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.body.classList.add("loaded");
       }, 50);
     });
+
+    const LANG = {
+      ru: {
+        title: "XPYCTUK",
+        subtitle: "Очень известный",
+        caption: "в узких кругах",
+        youtube: "YouTube",
+        telegram: "Telegram",
+        discord: "Discord"
+      },
+      en: {
+        title: "XPYCTUK",
+        subtitle: "Very famous",
+        caption: "in certain circles",
+        youtube: "YouTube",
+        telegram: "Telegram",
+        discord: "Discord"
+      }
+    };
+
+    function loadLanguage(lang) {
+      document.getElementById('title').innerText = LANG[lang].title;
+      document.getElementById('subtitle').innerText = LANG[lang].subtitle;
+      document.getElementById('caption').innerText = LANG[lang].caption;
+      document.getElementById('btnYoutube').innerHTML = "🎬 " + LANG[lang].youtube;
+      document.getElementById('btnTelegram').innerHTML = "💬 " + LANG[lang].telegram;
+      document.getElementById('btnDiscord').innerHTML = "🧠 " + LANG[lang].discord;
+      document.querySelector('.lang-toggle').innerText = lang === 'ru' ? 'EN' : 'RU';
+      localStorage.setItem('lang', lang);
+    }
+
+    function toggleLanguage() {
+      const current = localStorage.getItem('lang') || 'ru';
+      const nextLang = current === 'ru' ? 'en' : 'ru';
+      loadLanguage(nextLang);
+    }
+
+    const savedLang = localStorage.getItem('lang') || 'ru';
+    loadLanguage(savedLang);
   </script>
 </body>
 </html>
