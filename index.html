@@ -20,12 +20,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes explode {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.3) rotate(5deg); opacity: 0.7; }
-      100% { transform: scale(3) rotate(20deg); opacity: 0; }
-    }
-
     .banner {
       width: 100%;
       max-height: 320px;
@@ -89,10 +83,6 @@
       transform: scale(1.04);
     }
 
-    .explode {
-      animation: explode 1s forwards;
-    }
-
     .footer {
       margin-top: 50px;
       color: #555;
@@ -107,20 +97,18 @@
   <h2>Очень известный</h2>
   <h5>в узких кругах</h5>
   <div class="buttons">
-    <a href="#" onclick="explodeAndOpen(this, 'https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1')">🎬 YouTube</a>
-    <a href="#" onclick="explodeAndOpen(this, 'https://t.me/+T7ZblSqZibA0Yjk6')">💬 Telegram</a>
-    <a href="#" onclick="explodeAndOpen(this, 'https://discord.gg/t5ryTfJ7qR')">🧠 Discord</a>
+    <a href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playSound()">🎬 YouTube</a>
+    <a href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playSound()">💬 Telegram</a>
+    <a href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playSound()">🧠 Discord</a>
   </div>
   <div class="footer">
-    © 2025 | Made by XPYCTUK [ x-X-x ]
+    © 2025 | Made by XPYCTUK [ x-X-x ] v0.08
   </div>
 
+  <audio id="click-sound" src="typing.mp3" preload="auto"></audio>
   <script>
-    function explodeAndOpen(elem, url) {
-      elem.classList.add('explode');
-      setTimeout(() => {
-        window.open(url, '_blank');
-      }, 1000);
+    function playSound() {
+      document.getElementById('click-sound').play();
     }
   </script>
 </body>
