@@ -5,7 +5,7 @@
   <title>XPYCTUK — RUST Content</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* === Основные стили === */
+    /* Основной стиль */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -97,45 +97,55 @@
   </style>
 </head>
 <body class="preload">
-
-  <!-- 📷 Баннер сверху -->
+  <!-- Баннер -->
   <img src="TOP ТОПОВЫЙ 8к (оформ).jpg" alt="Rust Banner" class="banner">
 
-  <!-- 🔴 Логотип в круге -->
+  <!-- Логотип -->
   <img src="V-1-2.png" alt="Logo" class="logo">
 
-  <!-- 🔤 Текст -->
+  <!-- Заголовки -->
   <h1>XPYCTUK</h1>
   <h2>Очень известный</h2>
   <h5>в узких кругах</h5>
 
-  <!-- 🔘 Кнопки -->
+  <!-- Кнопки -->
   <div class="buttons">
-    <a href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playSound()">🎬 YouTube</a>
-    <a href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playSound()">💬 Telegram</a>
-    <a href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playSound()">🧠 Discord</a>
+    <a href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playClick()">🎬 YouTube</a>
+    <a href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playClick()">💬 Telegram</a>
+    <a href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playClick()">🧠 Discord</a>
   </div>
 
-  <!-- 📜 Подпись -->
+  <!-- Подвал -->
   <div class="footer">
     © 2025 | Made by XPYCTUK [ x-X-x ] v 0.12
   </div>
 
-  <!-- 🔊 Аудио-щелчок -->
+  <!-- Звуки -->
   <audio id="click-sound" src="typing.mp3" preload="auto"></audio>
+  <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
 
   <script>
-    // 🔊 УСТАНОВКА громкости щелчка (0.0 = тихо, 1.0 = громко)
+    // Настройка громкости
     const clickSound = document.getElementById('click-sound');
-    clickSound.volume = 0.8; // ← Измени здесь, если нужно
+    const hoverSound = document.getElementById('hover-sound');
+    clickSound.volume = 0.5; // громкость щелчка
+    hoverSound.volume = 0.5; // громкость наведения
 
-    // 🔁 Воспроизведение щелчка при нажатии
-    function playSound() {
-      clickSound.currentTime = 0; // сброс на начало
+    // Щелчок
+    function playClick() {
+      clickSound.currentTime = 0;
       clickSound.play();
     }
 
-    // 🌄 Убираем затемнение баннера после загрузки
+    // Наведение
+    document.querySelectorAll('.buttons a').forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        hoverSound.currentTime = 0;
+        hoverSound.play();
+      });
+    });
+
+    // Плавное появление баннера
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.body.classList.add("loaded");
