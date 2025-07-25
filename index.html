@@ -12,7 +12,6 @@
       color: white;
       text-align: center;
       animation: fadeIn 1.2s ease-in;
-      overflow-x: hidden;
     }
 
     @keyframes fadeIn {
@@ -25,13 +24,8 @@
       max-height: 320px;
       object-fit: cover;
       filter: brightness(0.5);
-      transition: filter 1.5s ease;
-      z-index: 0;
       position: relative;
-    }
-
-    body.loaded .banner {
-      filter: brightness(1);
+      z-index: -1;
     }
 
     .logo {
@@ -42,8 +36,6 @@
       background: black;
       box-shadow: 0 0 20px red;
       transition: transform 0.3s ease;
-      position: relative;
-      z-index: 10;
     }
 
     .logo:hover {
@@ -120,8 +112,7 @@
     }
   </style>
 </head>
-<body class="preload">
-
+<body>
   <div class="lang-switcher">
     <span>🌐</span>
     <select id="lang-select">
@@ -130,22 +121,30 @@
     </select>
   </div>
 
-  <img src="banner.jpg" alt="Rust Banner" class="banner">
-  <img src="logo.png" alt="Logo" class="logo">
+  <img src="TOP ТОПОВЫЙ 8к (оформ).jpg" alt="Rust Banner" class="banner">
+  <img src="V-1-2.png" alt="Logo" class="logo">
 
   <h1 id="title">XPYCTUK</h1>
   <h2 id="subtitle">Очень известный</h2>
   <h5 id="subdesc">в узких кругах</h5>
 
   <div class="buttons">
-    <a id="yt" href="#" target="_blank">🎬 YouTube</a>
-    <a id="tg" href="#" target="_blank">💬 Telegram</a>
-    <a id="ds" href="#" target="_blank">🧠 Discord</a>
+    <a id="yt" href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playSound()">🎮 YouTube</a>
+    <a id="tg" href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playSound()">💬 Telegram</a>
+    <a id="ds" href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playSound()">🧠 Discord</a>
   </div>
 
-  <div class="footer">© 2025 | Made by XPYCTUK [ x-x-x ] v 0.17</div>
+  <div class="footer">
+    © 2025 | Made by XPYCTUK [ x-x-x ] v 0.18
+  </div>
+
+  <audio id="click-sound" src="typing.mp3" preload="auto"></audio>
 
   <script>
+    function playSound() {
+      document.getElementById('click-sound').play();
+    }
+
     const translations = {
       ru: {
         title: "XPYCTUK",
@@ -172,7 +171,7 @@
       document.getElementById('title').innerText = translations[lang].title;
       document.getElementById('subtitle').innerText = translations[lang].subtitle;
       document.getElementById('subdesc').innerText = translations[lang].subdesc;
-      document.getElementById('yt').innerHTML = `🎬 ${translations[lang].youtube}`;
+      document.getElementById('yt').innerHTML = `🎮 ${translations[lang].youtube}`;
       document.getElementById('tg').innerHTML = `💬 ${translations[lang].telegram}`;
       document.getElementById('ds').innerHTML = `🧠 ${translations[lang].discord}`;
     }
@@ -184,12 +183,6 @@
     const savedLang = localStorage.getItem('lang') || 'ru';
     langSelect.value = savedLang;
     applyLanguage(savedLang);
-
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.body.classList.add("loaded");
-      }, 50);
-    });
   </script>
 </body>
 </html>
