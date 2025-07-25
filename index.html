@@ -5,55 +5,50 @@
   <title>XPYCTUK — RUST Content</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Основной стиль страницы */
+    /* === Основные стили === */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #0f0f0f; /* тёмный фон */
+      background-color: #0f0f0f;
       color: white;
       text-align: center;
-      animation: fadeIn 1.2s ease-in; /* плавное появление */
+      animation: fadeIn 1.2s ease-in;
       overflow-x: hidden;
     }
 
-    /* Анимация при загрузке */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Стиль изображения баннера */
     .banner {
       width: 100%;
       max-height: 320px;
       object-fit: cover;
-      filter: brightness(0.5); /* затемнение при старте */
-      transition: filter 1.5s ease; /* плавное осветление */
+      filter: brightness(0.5);
+      transition: filter 1.5s ease;
     }
 
-    /* Когда страница загружена — осветлить баннер */
     body.loaded .banner {
       filter: brightness(1);
     }
 
-    /* Стиль логотипа */
     .logo {
       width: 140px;
       margin-top: -70px;
       border-radius: 50%;
       border: 4px solid white;
       background: black;
-      box-shadow: 0 0 20px red; /* подсветка */
+      box-shadow: 0 0 20px red;
       transition: transform 0.3s ease;
       position: relative;
       z-index: 10;
     }
 
     .logo:hover {
-      transform: scale(1.05); /* небольшой зум при наведении */
+      transform: scale(1.05);
     }
 
-    /* Заголовки */
     h1 {
       margin-top: 10px;
       font-size: 2.4em;
@@ -73,7 +68,6 @@
       margin-top: -10px;
     }
 
-    /* Стили кнопок */
     .buttons a {
       display: block;
       margin: 14px auto;
@@ -95,82 +89,58 @@
       transform: scale(1.04);
     }
 
-    /* Подвал */
     .footer {
       margin-top: 50px;
       color: #555;
       font-size: 0.75em;
     }
-
-    /* Элемент громкости */
-    .volume-control {
-      margin-top: 30px;
-      color: #777;
-      font-size: 0.85em;
-    }
-
-    input[type="range"] {
-      width: 160px;
-    }
   </style>
 </head>
 <body class="preload">
-  <!-- Баннер Rust -->
+
+  <!-- 📷 Баннер сверху -->
   <img src="TOP ТОПОВЫЙ 8к (оформ).jpg" alt="Rust Banner" class="banner">
 
-  <!-- Логотип -->
+  <!-- 🔴 Логотип в круге -->
   <img src="V-1-2.png" alt="Logo" class="logo">
 
-  <!-- Заголовки -->
+  <!-- 🔤 Текст -->
   <h1>XPYCTUK</h1>
   <h2>Очень известный</h2>
   <h5>в узких кругах</h5>
 
-  <!-- Кнопки ссылок -->
+  <!-- 🔘 Кнопки -->
   <div class="buttons">
     <a href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playSound()">🎬 YouTube</a>
     <a href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playSound()">💬 Telegram</a>
     <a href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playSound()">🧠 Discord</a>
   </div>
 
-  <!-- Регулятор громкости -->
-  <div class="volume-control">
-    Громкость щелчка: <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
-  </div>
-
-  <!-- Подвал -->
+  <!-- 📜 Подпись -->
   <div class="footer">
-    © 2025 | Made by XPYCTUK [ x-X-x ] v 0.11
+    © 2025 | Made by XPYCTUK [ x-X-x ] v 0.12
   </div>
 
-  <!-- Аудиофайл -->
+  <!-- 🔊 Аудио-щелчок -->
   <audio id="click-sound" src="typing.mp3" preload="auto"></audio>
 
-  <!-- Скрипт -->
   <script>
+    // 🔊 УСТАНОВКА громкости щелчка (0.0 = тихо, 1.0 = громко)
     const clickSound = document.getElementById('click-sound');
-    const volumeSlider = document.getElementById('volumeSlider');
+    clickSound.volume = 0.8; // ← Измени здесь, если нужно
 
-    // При клике воспроизводим звук
+    // 🔁 Воспроизведение щелчка при нажатии
     function playSound() {
-      clickSound.currentTime = 0;
+      clickSound.currentTime = 0; // сброс на начало
       clickSound.play();
     }
 
-    // Когда страница загружена, запускаем анимацию баннера
+    // 🌄 Убираем затемнение баннера после загрузки
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.body.classList.add("loaded");
       }, 50);
     });
-
-    // Обновление громкости
-    volumeSlider.addEventListener('input', () => {
-      clickSound.volume = volumeSlider.value;
-    });
-
-    // Начальная громкость
-    clickSound.volume = volumeSlider.value;
   </script>
 </body>
 </html>
