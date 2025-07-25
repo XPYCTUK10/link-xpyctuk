@@ -95,48 +95,57 @@
       font-size: 0.75em;
     }
 
-    .lang-toggle {
+    .lang-switch {
       position: absolute;
-      top: 15px;
-      right: 20px;
-      background: none;
-      border: 1px solid #666;
-      padding: 6px 10px;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
+      top: 20px;
+      right: 30px;
     }
 
-    .lang-toggle:hover {
-      background: #222;
+    .lang-switch button {
+      background: none;
+      border: 2px solid #ff4c4c;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body class="preload">
-  <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
 
+  <!-- Переключатель языка -->
+  <div class="lang-switch">
+    <button onclick="switchLang()"><span id="lang-toggle">EN</span></button>
+  </div>
+
+  <!-- Баннер -->
   <img src="TOP ТОПОВЫЙ 8к (оформ).jpg" alt="Rust Banner" class="banner">
+
+  <!-- Логотип -->
   <img src="V-1-2.png" alt="Logo" class="logo">
 
-  <h1 id="title">XPYCTUK</h1>
-  <h2 id="subtitle">Очень известный</h2>
-  <h5 id="caption">в узких кругах</h5>
+  <!-- Заголовки -->
+  <h1>XPYCTUK</h1>
+  <h2>Очень известный</h2>
+  <h5>в узких кругах</h5>
 
+  <!-- Кнопки -->
   <div class="buttons">
-    <a id="btnYoutube" href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playClick()">🎬 YouTube</a>
-    <a id="btnTelegram" href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playClick()">💬 Telegram</a>
-    <a id="btnDiscord" href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playClick()">🧠 Discord</a>
+    <a href="https://www.youtube.com/channel/UC2Fa5Q1RkChe0jSTt6e9j-Q?sub_confirmation=1" target="_blank" onclick="playClick()">🎬 YouTube</a>
+    <a href="https://t.me/+T7ZblSqZibA0Yjk6" target="_blank" onclick="playClick()">💬 Telegram</a>
+    <a href="https://discord.gg/t5ryTfJ7qR" target="_blank" onclick="playClick()">🧠 Discord</a>
   </div>
 
+  <!-- Подвал -->
   <div class="footer">
-    © 2025 | Made by XPYCTUK [ x-X-x ] v 0.13
+    © 2025 | Made by XPYCTUK [ x-X-x ] v 0.14
   </div>
 
+  <!-- Звуки -->
   <audio id="click-sound" src="typing.mp3" preload="auto"></audio>
   <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
 
+  <!-- Скрипты -->
   <script>
     const clickSound = document.getElementById('click-sound');
     const hoverSound = document.getElementById('hover-sound');
@@ -155,50 +164,50 @@
       });
     });
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.body.classList.add("loaded");
-      }, 50);
-    });
-
     const LANG = {
       ru: {
         title: "XPYCTUK",
         subtitle: "Очень известный",
-        caption: "в узких кругах",
-        youtube: "YouTube",
-        telegram: "Telegram",
-        discord: "Discord"
+        tagline: "в узких кругах",
+        youtube: "🎬 YouTube",
+        telegram: "💬 Telegram",
+        discord: "🧠 Discord"
       },
       en: {
         title: "XPYCTUK",
-        subtitle: "Very famous",
-        caption: "in certain circles",
-        youtube: "YouTube",
-        telegram: "Telegram",
-        discord: "Discord"
+        subtitle: "Well known",
+        tagline: "in certain circles",
+        youtube: "🎬 YouTube",
+        telegram: "💬 Telegram",
+        discord: "🧠 Discord"
       }
     };
 
-    function loadLanguage(lang) {
-      document.getElementById('title').innerText = LANG[lang].title;
-      document.getElementById('subtitle').innerText = LANG[lang].subtitle;
-      document.getElementById('caption').innerText = LANG[lang].caption;
-      document.getElementById('btnYoutube').innerHTML = "🎬 " + LANG[lang].youtube;
-      document.getElementById('btnTelegram').innerHTML = "💬 " + LANG[lang].telegram;
-      document.getElementById('btnDiscord').innerHTML = "🧠 " + LANG[lang].discord;
-      document.querySelector('.lang-toggle').innerText = lang === 'ru' ? 'EN' : 'RU';
-      localStorage.setItem('lang', lang);
+    let currentLang = localStorage.getItem('lang') || 'ru';
+
+    function applyLang() {
+      const t = LANG[currentLang];
+      document.querySelector('h1').innerText = t.title;
+      document.querySelector('h2').innerText = t.subtitle;
+      document.querySelector('h5').innerText = t.tagline;
+      document.querySelectorAll('.buttons a')[0].innerText = t.youtube;
+      document.querySelectorAll('.buttons a')[1].innerText = t.telegram;
+      document.querySelectorAll('.buttons a')[2].innerText = t.discord;
+      document.getElementById('lang-toggle').innerText = currentLang === 'ru' ? 'EN' : 'RU';
+      localStorage.setItem('lang', currentLang);
     }
 
-    function toggleLanguage() {
-      const current = localStorage.getItem('lang') || 'ru';
-      const nextLang = current === 'ru' ? 'en' : 'ru';
-      loadLanguage(nextLang);
+    function switchLang() {
+      currentLang = currentLang === 'ru' ? 'en' : 'ru';
+      applyLang();
     }
 
-    const savedLang = localStorage.getItem('lang') || 'ru';
-    loadLanguage(savedLang);
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.body.classList.add("loaded");
+        applyLang();
+      }, 50);
+    });
   </script>
 </body>
 </html>
