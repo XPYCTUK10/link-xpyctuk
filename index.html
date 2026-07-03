@@ -177,6 +177,7 @@
   <div class="footer">© 2026 | HORNET</div>
 
   <audio id="click-sound" src="typing.mp3" preload="auto"></audio>
+  <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
 
   <script>
     const translations = {
@@ -210,32 +211,37 @@
       document.getElementById('ds').innerHTML = `🧠 ${translations[lang].discord}`;
     }
 
-    langSelect.addEventListener('change', () => {
-      applyLanguage(langSelect.value);
-    });
+      langSelect.addEventListener('change', () => {
+    applyLanguage(langSelect.value);
+  });
 
-    const savedLang = localStorage.getItem('lang') || 'ru';
-    langSelect.value = savedLang;
-    applyLanguage(savedLang);
+  const savedLang = localStorage.getItem('lang') || 'ru';
+  langSelect.value = savedLang;
+  applyLanguage(savedLang);
 
-    function playSound() {
-  const sound = document.getElementById('click-sound');
-  sound.currentTime = 0;
-  sound.play();
-}
+  function playClickSound() {
+    const sound = document.getElementById('click-sound');
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
 
-// Звук при наведении
-document.querySelectorAll('a, button, select, .logo').forEach(element => {
-    element.addEventListener('mouseenter', playSound);
-});
+  function playHoverSound() {
+    const sound = document.getElementById('hover-sound');
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
 
+  document.querySelectorAll('a, button, select, .logo').forEach(element => {
+    element.addEventListener('mouseenter', playHoverSound);
+    element.addEventListener('click', playClickSound);
+  });
 
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.body.classList.add("loaded");
-  }, 1000);
-});
-  </script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.body.classList.add("loaded");
+    }, 1000);
+  });
+</script>
 
 </body>
 </html>
