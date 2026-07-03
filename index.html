@@ -219,16 +219,23 @@
     applyLanguage(savedLang);
 
     function playSound() {
-      const sound = document.getElementById('click-sound');
-      sound.currentTime = 0;
-      sound.play();
-    }
+  const sound = document.getElementById('click-sound');
+  sound.currentTime = 0;
+  sound.play();
+}
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.body.classList.add("loaded");
-      }, 1000);
-    });
+// Звук при наведении
+document.querySelectorAll('a, button, select, .logo').forEach(element => {
+  element.addEventListener('mouseenter', () => {
+    playSound();
+  });
+});
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.body.classList.add("loaded");
+  }, 1000);
+});
   </script>
 
 </body>
