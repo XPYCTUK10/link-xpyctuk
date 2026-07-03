@@ -25,9 +25,9 @@
   width: 100%;
   height: 320px;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 35%;
   display: block;
-  filter: brightness(0.3);
+  filter: brightness(0.75);
   transition: filter 1.5s ease;
   z-index: 0;
   position: relative;
@@ -124,6 +124,30 @@
       font-weight: bold;
       cursor: pointer;
     }
+    @media (max-width: 600px) {
+  .banner {
+    height: 220px;
+    object-position: 50% 35%;
+  }
+
+  .logo {
+    width: 140px;
+    margin-top: -55px;
+  }
+
+  h1 {
+    font-size: 2.2em;
+  }
+
+  h2 {
+    font-size: 1em;
+  }
+
+  .buttons a {
+    width: 75%;
+    max-width: 280px;
+  }
+}
   </style>
 </head>
 
