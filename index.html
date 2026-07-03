@@ -226,10 +226,9 @@
 
 // Звук при наведении
 document.querySelectorAll('a, button, select, .logo').forEach(element => {
-  element.addEventListener('mouseenter', () => {
-    playSound();
-  });
+    element.addEventListener('mouseenter', playSound);
 });
+
 
 window.addEventListener("load", () => {
   setTimeout(() => {
